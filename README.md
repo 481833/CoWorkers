@@ -28,7 +28,7 @@ mvn clean package
 java -jar target/CoWorkers-0.0.1-SNAPSHOT.jar
 ```
 
-**4. Test method **
+**4. Test method**
 
 ```bash
 Data creation sequence as below
