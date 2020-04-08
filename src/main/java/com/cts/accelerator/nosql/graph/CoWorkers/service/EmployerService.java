@@ -32,4 +32,10 @@ public class EmployerService {
         return employerRepository.save(employer);
     }
 
+    public List<Employer> getWithName(String name) {
+        return StreamSupport
+                .stream(employerRepository.getWithName(name).spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
 }

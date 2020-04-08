@@ -3,14 +3,12 @@ package com.cts.accelerator.nosql.graph.CoWorkers.service;
 import com.cts.accelerator.nosql.graph.CoWorkers.RecordNotFoundException;
 import com.cts.accelerator.nosql.graph.CoWorkers.domain.Employer;
 import com.cts.accelerator.nosql.graph.CoWorkers.domain.Person;
+import com.cts.accelerator.nosql.graph.CoWorkers.domain.PersonEmployer;
 import com.cts.accelerator.nosql.graph.CoWorkers.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -43,5 +41,11 @@ public class PersonService {
 
     public Person createPerson(Person person) {
         return personRepository.save(person);
+    }
+
+    public List<Person> getAllChildsAndGrandchilds(String personId) {
+        Person person = this.getPersonById(personId);
+        Set<Person> persons = personRepository.getAllChildsAndGrandchilds("Person/" + personId, PersonEmployer.class);
+        return persons.stream().collect(Collectors.toList());
     }
 }

@@ -24,4 +24,9 @@ public class EmployerController {
     public Employer createEmployer(@Valid @RequestBody Employer employer) {
         return employerService.createEmployer(employer);
     }
+
+    @GetMapping("/employers/{name}")
+    public List<Employer> getWithName(@PathVariable(value = "name") String name) {
+        return employerService.getWithName(name);
+    }
 }
